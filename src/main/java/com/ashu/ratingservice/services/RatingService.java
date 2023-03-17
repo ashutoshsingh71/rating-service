@@ -13,4 +13,6 @@ public interface RatingService {
     List<Rating> getRatingFromUser(String userId);
     //get ratings from hotel id
     List<Rating> getRatingFromHotel(String hotelId);
+    Rating getRatingById(String ratingId);
+    void deleteRating(String ratingId);
 }
