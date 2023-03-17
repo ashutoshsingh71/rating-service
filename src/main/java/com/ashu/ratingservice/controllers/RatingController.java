@@ -36,4 +36,21 @@ public class RatingController {
         return ResponseEntity.ok(ratingService.getRatingFromHotel(hotelId));
     }
 
+    @PutMapping("/update/{ratingId}")
+    public ResponseEntity<Rating> updateRating(@PathVariable String ratingId,@RequestBody Rating rating){
+        Rating ratingById = ratingService.getRatingById(ratingId);
+        ratingById.setRating(rating.getRating());
+        ratingById.setFeedback(rating.getFeedback());
+        ratingById.setUserId(rating.getUserId());
+        ratingById.setHotelId(rating.getHotelId());
+        ratingService.createRating(ratingById);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ratingById);
+    }
+
+    @DeleteMapping("/delete/{ratingId}")
+    public String deleteRating(@PathVariable String ratingId){
+        ratingService.deleteRating(ratingId);
+        return "Rating deleted!!";
+    }
+
 }
